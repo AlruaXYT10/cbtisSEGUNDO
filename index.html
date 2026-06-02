@@ -630,7 +630,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Nuestra especialidad: Mantenimiento Automotriz</h3>
-                        <p>Nos especializamos en el conocimiento sobre máquinas de combustión, fallas en motores, y principios de energía</p>
+                        <p>Nos especializamos en el conocimiento sobre máquinas de combustión, fallas en motores, y principios de energía.</p>
                         
                     </div>
                 </article>
@@ -641,7 +641,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Electricidad</h3>
-                        <p>Especialización sobre el mundo de la energía eléctrica, desde instalaciones residenciales, hasta la industria eléctrica y la automatización de procesos</p>
+                        <p>Especialización sobre el mundo de la energía eléctrica, desde instalaciones residenciales, hasta la industria eléctrica y la automatización de procesos.</p>
                         
                     </div>
                 </article>
@@ -652,7 +652,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Programación</h3>
-                        <p>El inmersivo mundo de las máquinas y su lenguaje, el código que impulsa el mundo y alimenta los algoritmos generativos, convertido en una especialidad</p>
+                        <p>El inmersivo mundo de las máquinas y su lenguaje, el código que impulsa el mundo y alimenta los algoritmos generativos, convertido en una especialidad.</p>
                         
                     </div>
                 </article>
@@ -663,7 +663,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Contabilidad</h3>
-                        <p>La columna que sostiene desde una pequeña empresa hasta la economía global</p>
+                        <p>La columna que sostiene desde una pequeña empresa hasta la economía global.</p>
                         
                     </div>
                 </article>
@@ -674,7 +674,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Análisis Clínicos</h3>
-                        <p>Introducción a la medicina, la biología y la química, ejemplos prácticos sobre las reacciones nerviosas de cuerpos biológicos</p>
+                        <p>Introducción a la medicina, la biología y la química, ejemplos prácticos sobre las reacciones nerviosas de cuerpos biológicos.</p>
                         
                     </div>
                 </article>
@@ -685,7 +685,7 @@
                     </div>
                     <div class="card-body">
                         <h3>Recursos Humanos</h3>
-                        <p>Conoce los comportamientos de una multidud, estudia las actitudes humanas y aprende a administrar una sociedad</p>
+                        <p>Conoce los comportamientos de una multidud, estudia las actitudes humanas y aprende a administrar una sociedad.</p>
                         
                     </div>
                 </article>
@@ -711,7 +711,7 @@
             <div class="profile-card">
                 
                 <div class="profile-info">
-                    <h2>Sergio Fernando Perez López</h2>
+                    <h2>Sergio Fernando Pérez López</h2>
                     <span class="badge">2do semestre</span>
                     <p>Mantenimiento Automotriz</p>
                 </div>
@@ -723,7 +723,7 @@
             <div class="profile-card">
                 
                 <div class="profile-info">
-                    <h2>Jose Reymundo Mendoza Hernández</h2>
+                    <h2>José Reymundo Mendoza Hernández</h2>
                     <span class="badge">2do semestre</span>
                     <p>Mantenimiento Automotriz</p>
                 </div>
@@ -767,8 +767,8 @@
     <section class="section" id="estudiante">
         <div class="wrapper">
             <h2 class="section-title">Estudiantes</h2>
-            <h2>Sergio Fernando Perez López</h2>
-            <h2>Jose Reymundo Mendoza Hernández</h2>
+            <h2>Sergio Fernando Pérez López</h2>
+            <h2>José Reymundo Mendoza Hernández</h2>
             <h2>Aarón Eliseo Molina Gutiérrez</h2>
             <h2>Luis Alberto Aguilar Morales</h2>
         </div>
@@ -801,53 +801,6 @@
             CBTis 67 - 2026
         </div>
     </footer>
-    <script>
-        (function() {
-            const video = document.getElementById('promoVideo');
-            const btn = document.getElementById('btnSound');
-            if (!video) return;
-    
-            let userUnmuted = false;
-            const iconMuted = '\uD83D\uDD07';    // alt+speaker muted
-            const iconUnmuted = '\uD83D\uDD0A';   // speaker high
-    
-            // Reproducción automática al ser visible (muteado)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        video.play().catch(() => {});
-                    } else {
-                        if (!video.paused) video.pause();
-                    }
-                });
-            }, { threshold: 0.4 });
-            observer.observe(video);
-    
-            // Botón para activar/desactivar sonido
-            btn.addEventListener('click', function() {
-                if (userUnmuted) {
-                    // Volver a mutear
-                    video.muted = true;
-                    userUnmuted = false;
-                    btn.innerHTML = '\uD83D\uDD07';
-                    btn.title = 'Activar sonido';
-                } else {
-                    // Quitar muted
-                    video.muted = false;
-                    userUnmuted = true;
-                    btn.innerHTML = '\uD83D\uDD0A';
-                    btn.title = 'Silenciar';
-                    // Si está pausado o no ha arrancado, lo reproduce con audio
-                    if (video.paused) {
-                        video.play().catch(() => {});
-                    }
-                }
-            });
-    
-            // video.addEventListener('ended', () => {
-            //     video.pause();
-            // });
-        })();
-    </script>
+    <!-- borrar script de video integrado -->
 </body>
 </html>
