@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBTIS 67_</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ============================================
+               RESET & GLOBAL
+            ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cherry: #5c1a2a;
+            --cherry-light: #7A2A3E;
+            --cherry-dark: #3E0E1C;
+            --gray-100: #F4F3F2;
+            --gray-200: #E0DDDA;
+            --gray-400: #9C9894;
+            --gray-600: #5E5B58;
+            --gray-800: #2C2A28;
+            --gray-900: #1A1918;
+            --white: #FFFFFF;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --transition: 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        /* ============================================
+               LAYOUT
+            ============================================ */
+        .wrapper {
+            max-width: 70;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .justexxt {
+            text-align: justify;
+        }
+
+        /* ============================================
+               HEADER
+            ============================================ */
+        .site-header {
+            background: var(--cherry-dark);
+            color: var(--white);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--gray-200);
+            font-weight: 400;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--cherry-light);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            opacity: 0.85;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            border-bottom-color: var(--white);
+        }
+
+        /* ============================================
+               HERO
+            ============================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--cherry-dark) 0%, var(--cherry) 70%, var(--cherry-light) 100%);
+            color: var(--white);
+            padding: 80px 0 64px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            max-width: 720px;
+            margin: 0 auto 12px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 540px;
+            margin: 0 auto 28px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--white);
+            color: var(--cherry-dark);
+            padding: 12px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .hero-cta:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+               SECTIONS — base
+            ============================================ */
+        .section {
+            padding: 64px 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 650;
+            color: var(--cherry-dark);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--gray-200);
+        }
+
+        .section-sub {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: -24px;
+            margin-bottom: 32px;
+        }
+
+        /* ============================================
+               CARDS (materias / actividades)
+            ============================================ */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-img {
+            height: 180px;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* video promocional */
+        .card-video {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: var(--gray-900)
+        }
+        
+        .card-video video {
+            width: 100%;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            z-index: 10;
+        }
+
+        .btn-sound {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-sound:hover {
+            background: rgba(0, 0, 0, 0.85);
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 20px 22px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cherry-dark);
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            flex: 1;
+        }
+
+        .card-body .meta {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ============================================
+               GALERÍA (lightbox falso, grid)
+            ============================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4 / 3;
+            background: var(--gray-200);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 0.8rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        /* ============================================
+               ESTUDIANTES — perfil + proyectos
+            ============================================ */
+        .profile-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 32px 36px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .profile-info h2 {
+            font-size: 1.5rem;
+            font-weight: 650;
+            color: var(--cherry-dark);
+        }
+
+        .profile-info .badge {
+            display: inline-block;
+            background: var(--cherry);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            margin: 6px 0 10px;
+        }
+
+        .profile-info p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 28px;
+            margin-top: 14px;
+        }
+
+        .profile-stats div {
+            text-align: center;
+        }
+
+        .profile-stats strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--cherry-dark);
+        }
+
+        .profile-stats span {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .proyecto-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--cherry-light);
+        }
+
+        .proyecto-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .proyecto-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cherry-dark);
+        }
+
+        .proyecto-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin: 6px 0 10px;
+        }
+
+        .proyecto-card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--gray-200);
+            padding: 2px 10px;
+            border-radius: 12px;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+               SOCIAL
+            ============================================ */
+        .social-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            color: var(--gray-800);
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--cherry-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* ============================================
+               FOOTER
+            ============================================ */
+        .site-footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            text-align: center;
+            padding: 32px 0;
+            font-size: 0.85rem;
+            margin-top: 16px;
+        }
+
+        .site-footer strong {
+            color: var(--gray-200);
+        }
+
+        /* ============================================
+               RESPONSIVE
+            ============================================ */
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 0 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-card {
+                padding: 24px 20px;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="wrapper header-inner">
+            <div class="logo">
+                
+                CBTIS <span>67</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#materias">Materias</a>
+                <a href="#actividades">Actividades</a>
+                <a href="#estudiante">Estudiantes</a>
+                <a href="#social">Redes</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="wrapper">
+            <h1>BIENBENIDOS<br>Al CBTis 67</h1>
+            <p class="justexxt">Formar personas con conocimientos tecnológicos en las áreas industriales, comerciales y de servicios, a través de la preparación de bachilleres y profesionales tecnicos, con el fin de contribuir al desarrollo sustentable del país. &mdash;
+                Ser una institución de educación media superior certificada, orientada al aprendizaje y desarrollo de conocimientos tecnológicos y humanísticos.
+            </p>
+            <p class="justexxt">Formar y desarrollar integralmente a los educandos del sistema de educación tecnológica industrial, en donde se manifieste el avance y desarrollo tecnológico, la experiencia del personal docente, tecnico, administrativo y directivo, reforzando los valores que los motiven a la calidad, creatividad y la mejora continua en los procesos institucionales para la satisfacción de nuestros clientes</p>
+            <a href="#plandeestudios" class="hero-cta">Conoce nuestro trabajo</a>
+        </div>
+    </section>
+    
+    <!-- ============ MATERIAS (3 menús) ============ -->
+    <section class="section" id="materias">
+        <div class="wrapper">
+            <h2 class="section-title">Introducción</h2>
+            <div class="card-grid">
+                
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/cultura_digital_panorama-0.png">
+                    </div>
+                    <div class="card-body">
+                        <h3>Cultura Digital</h3>
+                        <p>Aprendizaje sobre el mundo de la tecnología computacional, formatos de archivos, y entornos de desarrollo.</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/paec_panorama-0.jpg">
+                    </div>
+                    <div class="card-body">
+                        <h3>Proyecto Escuela-Comunidad: Conduce Seguro</h3>
+                        <p>Iniciativa que tuvo como principal objetivo fomentar la cultura vial, la prevención de accidentes y la conciencia sobre el respeto a los señalamientos y el uso responsable del casco.</p>
+                        
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets\mantenimiento_panorama-0.jpg" alt="Ciencia y Tecnología">
+                    </div>
+                    <div class="card-body">
+                        <h3>Nuestra especialidad: Mantenimiento Automotriz</h3>
+                        <p>Nos especializamos en el conocimiento sobre máquinas de combustión, fallas en motores, y principios de energía</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/electricidad_panorama-0.jpg">
+                    </div>
+                    <div class="card-body">
+                        <h3>Electricidad</h3>
+                        <p>Especialización sobre el mundo de la energía eléctrica, desde instalaciones residenciales, hasta la industria eléctrica y la automatización de procesos</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/programacion_panorama-0.png">
+                    </div>
+                    <div class="card-body">
+                        <h3>Programación</h3>
+                        <p>El inmersivo mundo de las máquinas y su lenguaje, el código que impulsa el mundo y alimenta los algoritmos generativos, convertido en una especialidad</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/contabilidad_panorama-0.jpg">
+                    </div>
+                    <div class="card-body">
+                        <h3>Contabilidad</h3>
+                        <p>La columna que sostiene desde una pequeña empresa hasta la economía global</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/laboratorio_panorama-0.jpeg">
+                    </div>
+                    <div class="card-body">
+                        <h3>Análisis Clínicos</h3>
+                        <p>Introducción a la medicina, la biología y la química, ejemplos prácticos sobre las reacciones nerviosas de cuerpos biológicos</p>
+                        
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-img">
+                        <img src="assets/rh_panorama-0.jpeg">
+                    </div>
+                    <div class="card-body">
+                        <h3>Recursos Humanos</h3>
+                        <p>Conoce los comportamientos de una multidud, estudia las actitudes humanas y aprende a administrar una sociedad</p>
+                        
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 32px;">
+        <div class="wrapper">
+            <h2 class="section-title" id="plandeestudios">Plan de estudios</h2>
+            <div class="card-video">
+                <video id="promoVideo" muted playsinline loop preload="metadata">
+                    <source src="assets/video_promocional-0.mp4" type="video/mp4">
+                    <!-- fallback -->
+                     No puedo we
+                </video>
+                <div class="video-controls">
+                    <button class="btn-sound" id="btnSound" title="Activar sonido">&#128263;</button>
+                </div>
+            </div>
+            <a href="https://www.facebook.com/share/v/1M7JYg4dHx/" class="social-link">Miralo en &copy;Facebook</a>
+        </div>
+    </section>
+        
+    <!-- ============ ESTUDIANTE ============ -->
+    <section class="section" id="actividades">
+        <div class="wrapper">
+            <h2 class="section-title">Nuestras actividades</h2>
+
+            <!-- Perfil -->
+            <div class="profile-card">
+                
+                <div class="profile-info">
+                    <h2>Sergio Fernando Perez López</h2>
+                    <span class="badge">2do semestre</span>
+                    <p>Mantenimiento Automotriz</p>
+                </div>
+                <div class="proyectos-grid">
+                    <a href="assets\sergio_perez-pev-0.pdf" class="social-link">Portafolio de evidencias</a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                
+                <div class="profile-info">
+                    <h2>Jose Reymundo Mendoza Hernández</h2>
+                    <span class="badge">2do semestre</span>
+                    <p>Mantenimiento Automotriz</p>
+                </div>
+                <div class="proyectos-grid">
+                    <a href="assets\reymundo_mendoza-pev-0.pdf" class="social-link">Portafolio de evidencias</a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                
+                <div class="profile-info">
+                    <h2>Aarón Eliseo Molina Gutiérrez</h2>
+                    <span class="badge">2do semestre</span>
+                    <p>Mantenimiento Automotriz</p>
+                </div>
+                <div class="proyectos-grid">
+                    <a href="assets\aaron_molina-pev-0.pdf" class="social-link">Portafolio de evidencias</a>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                
+                <div class="profile-info">
+                    <h2>Luis Alberto Aguilar Morales</h2>
+                    <span class="badge">2do semestre</span>
+                    <p>Mantenimiento Automotriz</p>
+                </div>
+                <div class="proyectos-grid">
+                    <a href="assets\luis_aguilar-pev-0.pdf" class="social-link">Portafolio de evidencias</a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <a href="https://photos.app.goo.gl/28AeNJYM4yuRbdmw9" class="social-link">Entrevista Online</a>
+                <a href="https://docs.google.com/presentation/d/1VIK2-olLojyCOpH5Z6vLIbtTcxm2LXYzuxO2Kj8DbsI/edit?usp=drivesdk" class="social-link">Propósito 2</a>
+            </div>
+        </div>
+        
+    </section>
+    
+    <section class="section" id="estudiante">
+        <div class="wrapper">
+            <h2 class="section-title">Estudiantes</h2>
+            <h2>Sergio Fernando Perez López</h2>
+            <h2>Jose Reymundo Mendoza Hernández</h2>
+            <h2>Aarón Eliseo Molina Gutiérrez</h2>
+            <h2>Luis Alberto Aguilar Morales</h2>
+        </div>
+    </section>
+    
+    <!-- ============ SOCIAL ============ -->
+    <section class="section" id="social">
+        <div class="wrapper">
+            <h2 class="section-title">Redes sociales</h2>
+            <p class="section-sub" style="text-align:center;">Síguenos</p>
+            <div class="social-bar">
+    <a href="https://www.instagram.com/cbtis067misantla?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+       class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+        <span>Instagram</span>
+    </a>
+    
+    <a href="https://www.facebook.com/share/1Ew2ica6Wr/" 
+       class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook"></i>
+        <span>Facebook</span>
+    </a>
+</div>
+        </div>
+    </section>
+    
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="wrapper">
+            CBTis 67 - 2026
+        </div>
+    </footer>
+    <script>
+        (function() {
+            const video = document.getElementById('promoVideo');
+            const btn = document.getElementById('btnSound');
+            if (!video) return;
+    
+            let userUnmuted = false;
+            const iconMuted = '\uD83D\uDD07';    // alt+speaker muted
+            const iconUnmuted = '\uD83D\uDD0A';   // speaker high
+    
+            // Reproducción automática al ser visible (muteado)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {});
+                    } else {
+                        if (!video.paused) video.pause();
+                    }
+                });
+            }, { threshold: 0.4 });
+            observer.observe(video);
+    
+            // Botón para activar/desactivar sonido
+            btn.addEventListener('click', function() {
+                if (userUnmuted) {
+                    // Volver a mutear
+                    video.muted = true;
+                    userUnmuted = false;
+                    btn.innerHTML = '\uD83D\uDD07';
+                    btn.title = 'Activar sonido';
+                } else {
+                    // Quitar muted
+                    video.muted = false;
+                    userUnmuted = true;
+                    btn.innerHTML = '\uD83D\uDD0A';
+                    btn.title = 'Silenciar';
+                    // Si está pausado o no ha arrancado, lo reproduce con audio
+                    if (video.paused) {
+                        video.play().catch(() => {});
+                    }
+                }
+            });
+    
+            // video.addEventListener('ended', () => {
+            //     video.pause();
+            // });
+        })();
+    </script>
+</body>
+</html>
